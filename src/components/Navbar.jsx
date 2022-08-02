@@ -34,7 +34,7 @@ const Navbar = () => {
       }}
       component="nav"
     >
-      <Container sx={{ width: '100%' }}>
+      <Container>
         <Toolbar disableGutters>
           <Typography
             variant="h5"
@@ -42,7 +42,7 @@ const Navbar = () => {
             sx={{
               fontFamily: 'monospace',
               fontWeight: 700,
-              color: 'green',
+              color: '#3CA6A6',
               letterSpacing: '.3rem',
               textDecoration: 'none',
               cursor: 'pointer',
@@ -53,8 +53,8 @@ const Navbar = () => {
           <Typography sx={{ flexGrow: 1 }} />
 
           <Box>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Tooltip title="Open pages">
+              <IconButton onClick={handleOpenUserMenu}>
                 <Avatar
                   sx={{ backgroundColor: '#85dcb', color: '#41b3a3' }}
                 ></Avatar>
@@ -81,6 +81,7 @@ const Navbar = () => {
                   <MenuItem
                     onClick={() => {
                       handleCloseUserMenu();
+                      navigate('/profile');
                     }}
                   >
                     <Typography textAlign="center">Profile</Typography>
@@ -88,6 +89,7 @@ const Navbar = () => {
                   <MenuItem
                     onClick={() => {
                       handleCloseUserMenu();
+                      navigate('/new');
                     }}
                   >
                     <Typography textAlign="center">New</Typography>
@@ -95,6 +97,7 @@ const Navbar = () => {
                   <MenuItem
                     onClick={() => {
                       handleCloseUserMenu();
+                      navigate('/');
                     }}
                   >
                     <Typography textAlign="center">Logout</Typography>
