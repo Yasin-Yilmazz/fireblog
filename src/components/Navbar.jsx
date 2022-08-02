@@ -25,27 +25,34 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#e8a87c', mb: '1rem' }}>
-      <Container maxWidth="xl">
+    <AppBar
+      position="static"
+      sx={{
+        display: 'flex',
+        backgroundColor: '#e8a87c',
+        mb: '1rem',
+      }}
+      component="nav"
+    >
+      <Container sx={{ width: '100%' }}>
         <Toolbar disableGutters>
           <Typography
             variant="h5"
-            component="a"
-            href="/"
+            onClick={() => navigate('/')}
             sx={{
-              mr: 2,
-              flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
               color: 'green',
               letterSpacing: '.3rem',
               textDecoration: 'none',
+              cursor: 'pointer',
             }}
           >
             FIREBLOG
           </Typography>
+          <Typography sx={{ flexGrow: 1 }} />
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
