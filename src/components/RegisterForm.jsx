@@ -13,7 +13,7 @@ const RegisterForm = ({
   return (
     <div>
       <Form>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4, mb: 5 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           <TextField
             label="Email"
             name="email"

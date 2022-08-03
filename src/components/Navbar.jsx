@@ -30,7 +30,6 @@ const Navbar = () => {
       sx={{
         display: 'flex',
         backgroundColor: '#e8a87c',
-        mb: '1rem',
       }}
       component="nav"
     >
