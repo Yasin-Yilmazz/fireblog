@@ -4,6 +4,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth';
 
 // Your web app's Firebase configuration
@@ -21,22 +24,27 @@ const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 
-export const createUser = (email, password) => {
+//? Creating user and logged in
+export const createUser = (email, password, navigate) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log(`user ${user} signed in`);
+      navigate('/');
     })
     .catch((error) => {
       console.log(error);
+    })
+    .finally(() => {
+      logInUser(email, password);
     });
 };
 
-export const logInUser = (email, password) => {
+//? Login user navigate home page
+export const logInUser = (email, password, navigate) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log(`user ${user} logged in`);
+      navigate('/');
     })
     .catch((error) => {
       console.log(error);
@@ -51,4 +59,18 @@ export const userObserver = (setCurrentUser) => {
       setCurrentUser(false);
     }
   });
+};
+
+export const logOut = () => {
+  signOut(auth);
+};
+
+export const signInWithGoogle = (navigate) => {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log(result);
+      navigate('/');
+    })
+    .catch((err) => console.log(err));
 };

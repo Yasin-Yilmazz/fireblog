@@ -8,9 +8,14 @@ import { Form } from 'formik';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { logInUser } from '../helpers/firebase';
+import { logInUser, signInWithGoogle } from '../helpers/firebase';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -54,7 +59,7 @@ const LoginPage = () => {
           onSubmit={(values, actions) => {
             actions.resetForm();
             actions.setSubmitting(false);
-            logInUser(values.email, values.password);
+            logInUser(values.email, values.password, navigate);
           }}
         >
           {({ values, handleChange, errors, handleBlur, touched }) => (
@@ -90,6 +95,18 @@ const LoginPage = () => {
                   sx={{ backgroundColor: '#E8A87C' }}
                 >
                   Submit
+                </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                  sx={{ backgroundColor: '#C4402F' }}
+                  onClick={() => {
+                    signInWithGoogle(navigate);
+                    console.log(currentUser);
+                  }}
+                >
+                  g+ Sign in with Google+
                 </Button>
               </Box>
             </Form>

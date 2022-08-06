@@ -8,13 +8,16 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { logOut } from '../helpers/firebase';
 
 const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
   const user = '';
+  const { currentUser } = useContext(AuthContext);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -59,7 +62,7 @@ const Navbar = () => {
                 ></Avatar>
               </IconButton>
             </Tooltip>
-            {user ? (
+            {currentUser ? (
               <>
                 <Menu
                   sx={{ mt: '45px' }}
@@ -96,7 +99,8 @@ const Navbar = () => {
                   <MenuItem
                     onClick={() => {
                       handleCloseUserMenu();
-                      navigate('/');
+                      logOut();
+                      navigate('/login');
                     }}
                   >
                     <Typography textAlign="center">Logout</Typography>

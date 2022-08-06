@@ -9,8 +9,10 @@ import { Form } from 'formik';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -54,7 +56,7 @@ const Register = () => {
           onSubmit={(values, actions) => {
             actions.resetForm();
             actions.setSubmitting(false);
-            createUser(values.email, values.password);
+            createUser(values.email, values.password, navigate);
           }}
         >
           {({ values, handleChange, errors, handleBlur, touched }) => (
