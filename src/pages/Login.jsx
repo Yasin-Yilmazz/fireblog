@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -77,7 +78,7 @@ const LoginPage = () => {
                   error={touched.email && Boolean(errors.email)}
                 />
                 <TextField
-                  label="password"
+                  label="Password"
                   name="password"
                   id="password"
                   type="password"

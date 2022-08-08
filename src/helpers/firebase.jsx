@@ -29,6 +29,8 @@ export const createUser = (email, password, navigate) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      console.log(user);
+
       navigate('/');
     })
     .catch((error) => {
@@ -44,6 +46,7 @@ export const logInUser = (email, password, navigate) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      console.log(user);
       navigate('/');
     })
     .catch((error) => {
