@@ -9,12 +9,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { logInUser, signInWithGoogle } from '../helpers/firebase';
-import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-  const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   return (
@@ -104,7 +101,6 @@ const LoginPage = () => {
                   sx={{ backgroundColor: '#C4402F' }}
                   onClick={() => {
                     signInWithGoogle(navigate);
-                    console.log(currentUser);
                   }}
                 >
                   g+ Sign in with Google+

@@ -5,6 +5,7 @@ import { Form } from 'formik';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { writeUserData } from '../helpers/firebase';
 
 const New = () => {
   return (
@@ -33,6 +34,7 @@ const New = () => {
           onSubmit={(values, actions) => {
             actions.resetForm();
             actions.setSubmitting(false);
+            writeUserData(values.title, values.content, values.url);
           }}
         >
           {({ values, handleChange, errors, handleBlur, touched }) => (
@@ -57,6 +59,8 @@ const New = () => {
                   fullWidth
                   multiline
                   rows={7}
+                  value={values.content}
+                  onChange={handleChange}
                 />
                 <TextField
                   label="Image URL"
@@ -65,7 +69,7 @@ const New = () => {
                   type="text"
                   required
                   variant="outlined"
-                  value={values.title}
+                  value={values.url}
                   onChange={handleChange}
                 />
                 <Button

@@ -8,6 +8,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
+import { getDatabase, ref, set, onValue, get, child } from 'firebase/database';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -77,3 +78,27 @@ export const signInWithGoogle = (navigate) => {
     })
     .catch((err) => console.log(err));
 };
+
+const databaseUrl = 'https://fireblog.europe-west1.firebasedatabase.app';
+const database = getDatabase(app);
+
+export const writeUserData = (title, description, imageUrl) => {
+  const db = getDatabase();
+  set(ref(db, 'users/' + title), {
+    description: description,
+    blog_picture: imageUrl,
+  });
+};
+
+// const dbRef = ref(getDatabase());
+// get(child(dbRef, `users/${userId}`))
+//   .then((snapshot) => {
+//     if (snapshot.exists()) {
+//       console.log(snapshot.val());
+//     } else {
+//       console.log('No data available');
+//     }
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });

@@ -12,12 +12,14 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { logOut } from '../helpers/firebase';
+import { BlogContext } from '../context/BlogContext';
 
 const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
   const user = '';
   const { currentUser } = useContext(AuthContext);
+  const { profileImgUrl, setProfileImgUrl } = useContext(BlogContext);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -57,9 +59,9 @@ const Navbar = () => {
           <Box>
             <Tooltip title="Open pages">
               <IconButton onClick={handleOpenUserMenu}>
-                <Avatar
-                  sx={{ backgroundColor: '#85dcb', color: '#41b3a3' }}
-                ></Avatar>
+                <Avatar sx={{ backgroundColor: '#85dcb', color: '#41b3a3' }}>
+                  <img width="50px" src={profileImgUrl} />
+                </Avatar>
               </IconButton>
             </Tooltip>
             {currentUser ? (
