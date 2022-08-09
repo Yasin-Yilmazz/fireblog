@@ -30,6 +30,7 @@ const Profile = () => {
           <img
             style={{ textAlign: 'centers' }}
             width="200px"
+            alt="pp"
             src={
               profileImgUrl
                 ? profileImgUrl

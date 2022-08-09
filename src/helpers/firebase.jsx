@@ -8,12 +8,14 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
-import { getDatabase, ref, set, onValue, get, child } from 'firebase/database';
+import { getDatabase } from 'firebase/database';
+// import {  ref, set, onValue, get, child } from 'firebase/database';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
@@ -81,13 +83,13 @@ export const signInWithGoogle = (navigate) => {
 
 export const database = getDatabase(app);
 
-export const writeUserData = (title, description, postUrl) => {
-  set(ref(database, 'blog/'), {
-    title: title,
-    description: description,
-    postUrl: postUrl,
-  });
-};
+// export const writeUserData = (title, description, postUrl) => {
+//   set(ref(database, 'blog/'), {
+//     title: title,
+//     description: description,
+//     postUrl: postUrl,
+//   });
+// };
 
 // const dbRef = ref(getDatabase());
 // get(child(dbRef, `users/${userId}`))

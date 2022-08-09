@@ -17,9 +17,8 @@ import { BlogContext } from '../context/BlogContext';
 const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
-  const user = '';
   const { currentUser } = useContext(AuthContext);
-  const { profileImgUrl, setProfileImgUrl } = useContext(BlogContext);
+  const { profileImgUrl } = useContext(BlogContext);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -60,7 +59,7 @@ const Navbar = () => {
             <Tooltip title="Open pages">
               <IconButton onClick={handleOpenUserMenu}>
                 <Avatar sx={{ backgroundColor: '#85dcb', color: '#41b3a3' }}>
-                  <img width="50px" src={profileImgUrl} />
+                  <img width="50px" src={profileImgUrl} alt="pp" />
                 </Avatar>
               </IconButton>
             </Tooltip>

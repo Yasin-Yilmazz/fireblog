@@ -5,8 +5,9 @@ import { Form } from 'formik';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { database, writeUserData } from '../helpers/firebase';
+import { database } from '../helpers/firebase';
 import { ref, set } from 'firebase/database';
+import { uid } from 'uid';
 
 const New = () => {
   return (
@@ -36,10 +37,13 @@ const New = () => {
             actions.resetForm();
             actions.setSubmitting(false);
             console.log(values);
-            set(ref(database, 'blog/'), {
+
+            const uuid = uid();
+            set(ref(database, `/${uuid}`), {
               title: values.title,
-              description: values.content,
-              postUrl: values.url,
+              content: values.content,
+              url: values.url,
+              uuid,
             });
           }}
         >
