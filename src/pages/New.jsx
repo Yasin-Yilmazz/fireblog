@@ -5,7 +5,8 @@ import { Form } from 'formik';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { writeUserData } from '../helpers/firebase';
+import { database, writeUserData } from '../helpers/firebase';
+import { ref, set } from 'firebase/database';
 
 const New = () => {
   return (
@@ -30,14 +31,19 @@ const New = () => {
           ADD POST
         </Typography>
         <Formik
-          initialValues={{}}
+          initialValues={{ title: '', content: '', url: '' }}
           onSubmit={(values, actions) => {
             actions.resetForm();
             actions.setSubmitting(false);
-            writeUserData(values.title, values.content, values.url);
+            console.log(values);
+            set(ref(database, 'blog/'), {
+              title: values.title,
+              description: values.content,
+              postUrl: values.url,
+            });
           }}
         >
-          {({ values, handleChange, errors, handleBlur, touched }) => (
+          {({ values, handleChange }) => (
             <Form>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <TextField
@@ -53,8 +59,8 @@ const New = () => {
                 <TextField
                   label="Content"
                   name="content"
-                  type="text"
                   id="content"
+                  type="text"
                   required
                   fullWidth
                   multiline
@@ -64,8 +70,8 @@ const New = () => {
                 />
                 <TextField
                   label="Image URL"
-                  name="image URL"
-                  id="image URL"
+                  name="url"
+                  id="url"
                   type="text"
                   required
                   variant="outlined"

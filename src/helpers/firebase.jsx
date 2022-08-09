@@ -79,14 +79,13 @@ export const signInWithGoogle = (navigate) => {
     .catch((err) => console.log(err));
 };
 
-const databaseUrl = 'https://fireblog.europe-west1.firebasedatabase.app';
-const database = getDatabase(app);
+export const database = getDatabase(app);
 
-export const writeUserData = (title, description, imageUrl) => {
-  const db = getDatabase();
-  set(ref(db, 'users/' + title), {
+export const writeUserData = (title, description, postUrl) => {
+  set(ref(database, 'blog/'), {
+    title: title,
     description: description,
-    blog_picture: imageUrl,
+    postUrl: postUrl,
   });
 };
 
