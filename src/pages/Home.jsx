@@ -24,7 +24,6 @@ const Home = () => {
         <>
           <h1>{title} </h1>
           <h2>{content} </h2>
-          <h2>{uuid} </h2>
         </>
       ))}
     </div>
