@@ -5,9 +5,7 @@ import { Form } from 'formik';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { database } from '../helpers/firebase';
-import { ref, set } from 'firebase/database';
-import { uid } from 'uid';
+import { createBlog } from '../helpers/fireStore';
 
 const New = () => {
   return (
@@ -37,14 +35,8 @@ const New = () => {
             actions.resetForm();
             actions.setSubmitting(false);
             console.log(values);
-
-            const uuid = uid();
-            set(ref(database, `/${uuid}`), {
-              title: values.title,
-              content: values.content,
-              url: values.url,
-              uuid,
-            });
+            // export createblog function from firestore and use
+            createBlog(values.title, values.content, values.url);
           }}
         >
           {({ values, handleChange }) => (

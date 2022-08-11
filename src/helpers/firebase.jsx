@@ -57,6 +57,7 @@ export const logInUser = (email, password, navigate) => {
     });
 };
 
+//? setting current user
 export const userObserver = (setCurrentUser) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -67,10 +68,12 @@ export const userObserver = (setCurrentUser) => {
   });
 };
 
+//? just logout
 export const logOut = () => {
   signOut(auth);
 };
 
+//? google login
 export const signInWithGoogle = (navigate) => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider)
@@ -82,24 +85,3 @@ export const signInWithGoogle = (navigate) => {
 };
 
 export const database = getDatabase(app);
-
-// export const writeUserData = (title, description, postUrl) => {
-//   set(ref(database, 'blog/'), {
-//     title: title,
-//     description: description,
-//     postUrl: postUrl,
-//   });
-// };
-
-// const dbRef = ref(getDatabase());
-// get(child(dbRef, `users/${userId}`))
-//   .then((snapshot) => {
-//     if (snapshot.exists()) {
-//       console.log(snapshot.val());
-//     } else {
-//       console.log('No data available');
-//     }
-//   })
-//   .catch((error) => {
-//     console.error(error);
-//   });

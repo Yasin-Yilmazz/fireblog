@@ -1,5 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { initializeApp } from 'firebase/app';
-import { getDatabase } from 'firebase/database';
+import { getDatabase, onValue, ref, remove, set } from 'firebase/database';
+import { useContext, useEffect } from 'react';
+import { uid } from 'uid';
+import { BlogContext } from '../context/BlogContext';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -15,3 +19,38 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const database = getDatabase(app);
+
+//? create blog function
+
+export const createBlog = (title, content, url) => {
+  const uuid = uid();
+  set(ref(database, `blog/${uuid}`), {
+    title,
+    content,
+    url,
+  });
+};
+
+//? read blog function
+
+export const readBlog = () => {
+  const { setDataList } = useContext(BlogContext);
+
+  useEffect(() => {
+    onValue(ref(database), (snapshot) => {
+      // clear datalist because of repetation
+      setDataList([]);
+      const data = snapshot.val();
+      console.log(data);
+      if (data !== null) {
+        Object.values(data)?.map((value) => {
+          return setDataList((oldArray) => [...oldArray, value]);
+        });
+      }
+    });
+  }, [setDataList]);
+};
+
+export const deleteBlog = (id) => {
+  remove(ref(database, `blog/${id}`));
+};
