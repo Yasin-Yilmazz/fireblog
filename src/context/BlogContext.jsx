@@ -7,6 +7,7 @@ const BlogContextProvider = ({ children }) => {
     'https://picsum.photos/id/237/200/160'
   );
   const [dataList, setDataList] = useState([]);
+  const [dataArrayList, setDataArrayList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -18,6 +19,8 @@ const BlogContextProvider = ({ children }) => {
         setDataList,
         isLoading,
         setIsLoading,
+        dataArrayList,
+        setDataArrayList,
       }}
     >
       {children}

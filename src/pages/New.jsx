@@ -34,7 +34,6 @@ const New = () => {
           onSubmit={(values, actions) => {
             actions.resetForm();
             actions.setSubmitting(false);
-            console.log(values);
             // export createblog function from firestore and use
             createBlog(values.title, values.content, values.url);
           }}

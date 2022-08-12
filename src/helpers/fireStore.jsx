@@ -1,6 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { initializeApp } from 'firebase/app';
-import { getDatabase, onValue, ref, remove, set } from 'firebase/database';
+import {
+  getDatabase,
+  onValue,
+  ref,
+  remove,
+  set,
+  update,
+} from 'firebase/database';
 import { useContext, useEffect } from 'react';
 import { uid } from 'uid';
 import { BlogContext } from '../context/BlogContext';
@@ -54,4 +61,14 @@ export const readBlog = () => {
 //? delete specific blog
 export const deleteBlog = (id) => {
   remove(ref(database, `/${id}`));
+};
+
+//? update specific field
+export const updateBlog = (id, title, content, url) => {
+  update(ref(database, `/${id}`), {
+    title,
+    content,
+    url,
+    id,
+  });
 };
