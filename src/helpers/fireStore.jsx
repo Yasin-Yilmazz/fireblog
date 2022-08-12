@@ -51,6 +51,7 @@ export const readBlog = () => {
   }, [setDataList]);
 };
 
+//? delete specific blog
 export const deleteBlog = (id) => {
   remove(ref(database, `/${id}`));
 };
