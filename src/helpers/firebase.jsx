@@ -33,7 +33,6 @@ export const createUser = (email, password, navigate) => {
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
-
       navigate('/');
     })
     .catch((error) => {

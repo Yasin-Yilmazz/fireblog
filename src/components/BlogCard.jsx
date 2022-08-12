@@ -8,19 +8,21 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
+import { blue } from '@mui/material/colors';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { AuthContext } from '../context/AuthContext';
 
 const BlogCard = () => {
   const { dataList } = useContext(BlogContext);
   readBlog();
   const { profileImgUrl } = useContext(BlogContext);
+  const { currentUser } = useContext(AuthContext);
 
   let d = new Date();
-  console.log(d);
+  console.log(currentUser);
 
   dataList && <h1>Loading</h1>;
   return (
@@ -34,25 +36,35 @@ const BlogCard = () => {
       }}
     >
       {dataList?.map(({ title, content, url, uuid }) => (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card key={uuid} sx={{ maxWidth: 345 }}>
           <CardMedia component="img" height="194" image={url} />
           <CardContent>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="h6">{title}</Typography>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitLineClamp: '3',
+                WebkitBoxOrient: 'vertical',
+              }}
+            >
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam quam
+              unde ab ex autem minus, et accusamus dolores perferendis? Eaque
+              est atque aspernatur mollitia ipsa perferendis neque rerum modi
+              eligendi?
               {content}
             </Typography>
           </CardContent>
           <CardHeader
             avatar={
-              <Avatar>
-                <img src={profileImgUrl} alt="pp" width="50px" />
+              <Avatar sx={{ bgcolor: blue[500] }} aria-label="blog">
+                <img src={profileImgUrl} alt={currentUser} width="50px" />
               </Avatar>
             }
-            action={
-              <IconButton aria-label="settings">
-                <MoreVertIcon />
-              </IconButton>
-            }
-            title={title}
+            title={currentUser.email}
             subheader={`${String(d).slice(0, 16)}`}
           />
           <CardActions disableSpacing>
