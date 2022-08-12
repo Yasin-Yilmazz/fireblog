@@ -4,20 +4,17 @@ import { deleteBlog, readBlog } from '../helpers/fireStore';
 
 const Home = () => {
   const { dataList } = useContext(BlogContext);
-  console.log(dataList);
-
   readBlog();
 
   dataList && <h1>Loading</h1>;
-
   return (
     <div>
-      {dataList?.map(({ title, content, url }) => (
+      {dataList?.map(({ title, content, url, uuid }) => (
         <>
           <h1>{title} </h1>
           <h2>{content} </h2>
           <h3>{url} </h3>
-          <button onClick={() => deleteBlog()}>delete</button>
+          <button onClick={() => deleteBlog(uuid)}>delete</button>
         </>
       ))}
     </div>

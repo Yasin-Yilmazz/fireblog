@@ -24,10 +24,11 @@ export const database = getDatabase(app);
 
 export const createBlog = (title, content, url) => {
   const uuid = uid();
-  set(ref(database, `blog/${uuid}`), {
+  set(ref(database, `/${uuid}`), {
     title,
     content,
     url,
+    uuid,
   });
 };
 
@@ -41,7 +42,6 @@ export const readBlog = () => {
       // clear datalist because of repetation
       setDataList([]);
       const data = snapshot.val();
-      console.log(data);
       if (data !== null) {
         Object.values(data)?.map((value) => {
           return setDataList((oldArray) => [...oldArray, value]);
@@ -52,5 +52,5 @@ export const readBlog = () => {
 };
 
 export const deleteBlog = (id) => {
-  remove(ref(database, `blog/${id}`));
+  remove(ref(database, `/${id}`));
 };
