@@ -1,36 +1,28 @@
-import { Box, Typography } from '@mui/material';
-import React, { useContext } from 'react';
-import BlogCard from '../components/BlogCard';
-import { BlogContext } from '../context/BlogContext';
+import { Box, Typography } from "@mui/material";
+import BlogCard from "../components/BlogCard";
 
 const Home = () => {
-  const { dataList } = useContext(BlogContext);
-  const data = [dataList];
   return (
     <Box
       sx={{
-        textAlign: 'center',
-        fontFamily: 'Rubik Marker Hatch, cursive',
-        height: '100vh',
-        overflow: 'auto',
+        textAlign: "center",
+        fontFamily: "Rubik Marker Hatch, cursive",
+        height: "100vh",
+        maxWidth: "100vw",
       }}
     >
-      <Typography variant="h3" pt={4} sx={{ fontFamily: 'Girassol, cursive' }}>
+      <Typography variant='h3' pt={4} sx={{ fontFamily: "Girassol, cursive" }}>
         DASHBOARD
       </Typography>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexDiretion: 'row',
+          display: "flex",
+          justifyContent: "center",
           gap: 4,
           mt: 4,
-          cursor: 'pointer',
         }}
       >
-        {data?.map((data, index) => {
-          return <BlogCard data={data} key={index} />;
-        })}
+        <BlogCard />
       </Box>
     </Box>
   );
