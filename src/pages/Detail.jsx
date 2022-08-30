@@ -5,16 +5,13 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useContext } from "react";
-import { BlogContext } from "../context/BlogContext";
 import { useLocation } from "react-router-dom";
 
 export default function Detail() {
-  const { dataList } = useContext(BlogContext);
   const { state } = useLocation();
   console.log("state => ", state);
 
-  const { title, content, url, uuid } = state;
+  const { title, content, url } = state;
 
   return (
     <div
