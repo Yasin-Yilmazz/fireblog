@@ -24,7 +24,6 @@ const BlogCard = () => {
   readBlog();
 
   let d = new Date();
-  console.log(dataList);
 
   dataList && <h1>Loading</h1>;
   return (
@@ -42,7 +41,9 @@ const BlogCard = () => {
         <Card
           key={uuid}
           sx={{ maxWidth: 345, cursor: "pointer" }}
-          onClick={() => navigate("detail/" + uuid)} // onclick to card navigate spesific blog
+          onClick={() =>
+            navigate("detail/" + uuid, { state: { title, content, url, uuid } })
+          } // onclick to card navigate spesific blog
         >
           <CardMedia component='img' height='194' image={url} />
           <CardContent>
