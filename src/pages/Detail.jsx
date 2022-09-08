@@ -5,13 +5,15 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { deleteBlog } from "../helpers/fireStore";
 
 export default function Detail() {
+  const navigate = useNavigate();
   const { state } = useLocation();
   console.log("state => ", state);
 
-  const { title, content, url } = state;
+  const { title, content, url, uuid } = state;
 
   return (
     <div
@@ -39,7 +41,15 @@ export default function Detail() {
           </Typography>
         </CardContent>
         <CardActions sx={{}}>
-          <Button size='small'>Delete</Button>
+          <Button
+            onClick={() => {
+              deleteBlog(uuid);
+              navigate("/");
+            }}
+            size='small'
+          >
+            Delete
+          </Button>
           <Button size='small'>Edit</Button>
         </CardActions>
       </Card>
