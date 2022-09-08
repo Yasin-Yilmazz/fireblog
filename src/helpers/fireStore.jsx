@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import {
   getDatabase,
   onValue,
@@ -7,10 +7,10 @@ import {
   remove,
   set,
   update,
-} from 'firebase/database';
-import { useContext, useEffect } from 'react';
-import { uid } from 'uid';
-import { BlogContext } from '../context/BlogContext';
+} from "firebase/database";
+import { useContext, useEffect } from "react";
+import { uid } from "uid";
+import { BlogContext } from "../context/BlogContext";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -29,12 +29,14 @@ export const database = getDatabase(app);
 
 //? create blog function
 
-export const createBlog = (title, content, url) => {
+export const createBlog = (title, content, url, author, date) => {
   const uuid = uid();
   set(ref(database, `/${uuid}`), {
     title,
     content,
     url,
+    author,
+    date,
     uuid,
   });
 };

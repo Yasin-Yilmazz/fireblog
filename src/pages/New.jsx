@@ -1,61 +1,76 @@
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import { Formik } from 'formik';
-import { Form } from 'formik';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import { createBlog } from '../helpers/fireStore';
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import { Formik } from "formik";
+import { Form } from "formik";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import { createBlog } from "../helpers/fireStore";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const New = () => {
+  const { currentUser } = useContext(AuthContext);
+  const author = currentUser.email;
+  let d = new Date();
+  const navigate = useNavigate();
+  console.log("date", String(d).slice(0, 16));
   return (
     <div
       style={{
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        backgroundColor: '#ddd',
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "#ddd",
       }}
     >
       <Container
-        maxWidth="sm"
+        maxWidth='sm'
         sx={{
-          height: '500px',
-          margin: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
+          height: "500px",
+          margin: "auto",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-        <Typography variant="h4" marginBottom="2rem" textAlign="center">
+        <Typography variant='h4' marginBottom='2rem' textAlign='center'>
           ADD POST
         </Typography>
         <Formik
-          initialValues={{ title: '', content: '', url: '' }}
-          onSubmit={(values, actions) => {
+          initialValues={{
+            title: "",
+            content: "",
+            url: "",
+            author: author,
+            date: String(d).slice(0, 16),
+          }}
+          onSubmit={({ title, content, url, author, date }, actions) => {
             actions.resetForm();
             actions.setSubmitting(false);
             // export createblog function from firestore and use
-            createBlog(values.title, values.content, values.url);
+            createBlog(title, content, url, author, date);
+            navigate("/");
           }}
         >
           {({ values, handleChange }) => (
             <Form>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                 <TextField
-                  label="Title"
-                  name="title"
-                  id="title"
-                  type="text"
+                  label='Title'
+                  name='title'
+                  id='title'
+                  type='text'
                   required
-                  variant="outlined"
+                  variant='outlined'
                   value={values.title}
                   onChange={handleChange}
                 />
                 <TextField
-                  label="Content"
-                  name="content"
-                  id="content"
-                  type="text"
+                  label='Content'
+                  name='content'
+                  id='content'
+                  type='text'
                   required
                   fullWidth
                   multiline
@@ -64,20 +79,20 @@ const New = () => {
                   onChange={handleChange}
                 />
                 <TextField
-                  label="Image URL"
-                  name="url"
-                  id="url"
-                  type="text"
+                  label='Image URL'
+                  name='url'
+                  id='url'
+                  type='text'
                   required
-                  variant="outlined"
+                  variant='outlined'
                   value={values.url}
                   onChange={handleChange}
                 />
                 <Button
-                  type="submit"
-                  variant="contained"
-                  size="large"
-                  sx={{ backgroundColor: '#3CA6A6' }}
+                  type='submit'
+                  variant='contained'
+                  size='large'
+                  sx={{ backgroundColor: "#3CA6A6" }}
                 >
                   add post
                 </Button>

@@ -42,7 +42,11 @@ const BlogCard = () => {
           key={uuid}
           sx={{ maxWidth: 345, cursor: "pointer" }}
           onClick={() =>
-            navigate("detail/" + uuid, { state: { title, content, url, uuid } })
+            currentUser
+              ? navigate("detail/" + uuid, {
+                  state: { title, content, url, uuid },
+                })
+              : navigate("login")
           } // onclick to card navigate spesific blog
         >
           <CardMedia component='img' height='194' image={url} />
