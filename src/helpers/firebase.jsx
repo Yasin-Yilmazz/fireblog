@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -7,8 +7,8 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
-} from 'firebase/auth';
-import { getDatabase } from 'firebase/database';
+} from "firebase/auth";
+import { getDatabase } from "firebase/database";
 // import {  ref, set, onValue, get, child } from 'firebase/database';
 
 // Your web app's Firebase configuration
@@ -33,7 +33,7 @@ export const createUser = (email, password, navigate) => {
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
-      navigate('/');
+      navigate("/");
     })
     .catch((error) => {
       console.log(error);
@@ -49,7 +49,7 @@ export const logInUser = (email, password, navigate) => {
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
-      navigate('/');
+      navigate("/");
     })
     .catch((error) => {
       console.log(error);
@@ -78,7 +78,7 @@ export const signInWithGoogle = (navigate) => {
   signInWithPopup(auth, provider)
     .then((result) => {
       console.log(result);
-      navigate('/');
+      navigate("/");
     })
     .catch((err) => console.log(err));
 };
